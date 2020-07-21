@@ -103,7 +103,8 @@ public class RegisterController {
      */
     @GetMapping("getCode")
     public BlogJSONResult getCode(@RequestParam("phone") String phone){
-        String s = smsService.sendMesModel(phone, 0);
+//        String s = smsService.sendMesModel(phone, 0);
+        String s = "OK";
         System.out.println(s);
         if(s.equals("OK")){
             return BlogJSONResult.ok();
@@ -119,9 +120,13 @@ public class RegisterController {
      */
     @GetMapping("getCodeReflush")
     public BlogJSONResult getCodeReflush(@RequestParam("phone") String phone){
-        if(redisOperator.hasKey(Constant.USER_PHONE_CODE+phone)){
-            return BlogJSONResult.ok(redisOperator.get(Constant.USER_PHONE_CODE+phone));
-        }else{
+//        if(redisOperator.hasKey(Constant.USER_PHONE_CODE+phone)){
+//            return BlogJSONResult.ok(redisOperator.get(Constant.USER_PHONE_CODE+phone));
+//        }
+        if (true){
+            return  BlogJSONResult.ok("1234");
+        }
+        else{
             return BlogJSONResult.errorMsg("验证码失效");
         }
     }

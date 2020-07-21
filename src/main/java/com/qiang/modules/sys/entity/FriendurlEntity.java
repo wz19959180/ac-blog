@@ -2,18 +2,15 @@ package com.qiang.modules.sys.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 
-/**
- * @Author: qiang
- * @ProjectName: adminsystem
- * @Package: com.qiang.modules.sys.entity
- * @Description:
- * @Date: 2019/8/19 0019 21:29
- **/
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName(value = "friendurl")
 public class FriendurlEntity implements Serializable {
     private static final long serialVersionUID = -9163902960357555427L;
