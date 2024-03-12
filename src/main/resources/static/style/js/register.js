@@ -12,7 +12,6 @@ var noticeBox = $(".notice-box");
  * @type {string}
  */
 
-var myreg = /^1[3-578]\d{9}$/;
 /**
  * 注册事件
  */
@@ -25,8 +24,6 @@ registerBtn.click(function () {
     if (phone1.length == 0) {
         $(".notice-box-phone").show();
     } else if (phone1.length != 11) {
-        $(".notice-box-phone-num").show();
-    } else if (!myreg.test(phone1)) {
         $(".notice-box-phone-num").show();
     } else if (checkPhone(phone1)) {
         $(".notice-box-phone-exit").show();

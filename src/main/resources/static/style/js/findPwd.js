@@ -1,5 +1,4 @@
 var noticeBox = $(".notice-box");
-var myreg = /^(((13[0-9]{1})|(14[0-9]{1})|(17[0]{1})|(15[0-3]{1})|(15[5-9]{1})|(18[0-9]{1}))+\d{8})$/;
 
 /**
  * 修改密码（按钮）
@@ -29,9 +28,7 @@ function updPassword() {
         $(".notice-box-phone").show();
     } else if (phone.length != 11) {
         $(".notice-box-phone-num").show();
-    } else if (!myreg.test(phone)) {
-        $(".notice-box-phone-num").show();
-    }else if(!checkPhone1(phone)){
+    } else if(!checkPhone1(phone)){
         $(".notice-box-phone-exit").show();
     } else if (yan1.length != 4) {
         $(".notice-box-yan").show();

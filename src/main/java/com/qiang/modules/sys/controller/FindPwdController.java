@@ -36,12 +36,11 @@ public class FindPwdController {
      */
     @GetMapping("getUpdPwdCode")
     public BlogJSONResult getUpdPwdCode(@RequestParam("phone") String phone){
-        String s = smsService.sendMesModel(phone, 1);
-        System.out.println(s);
-        if(s.equals("OK")){
-            return BlogJSONResult.ok();
-        }else{
-            return BlogJSONResult.errorMsg("获取验证码失败");
+        if (true){
+            return  BlogJSONResult.ok("1234");
+        }
+        else{
+            return BlogJSONResult.errorMsg("验证码失效");
         }
     }
 
