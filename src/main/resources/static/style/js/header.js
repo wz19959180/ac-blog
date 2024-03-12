@@ -303,7 +303,7 @@ $(function () {
  * @type {string}
  */
 //网站开始时间
-var siteBeginRunningTime = '2020-07-22 10:00:00';
+var siteBeginRunningTime = '2024-03-11 23:51:00';
 
 //网站运行时间
 //beginTime为建站时间的时间戳
@@ -345,7 +345,7 @@ setInterval(function () {
 
 
 //网站最后更新时间（版本更新需更改）
-var siteLastUpdateTime = '2020年07月22日14点';
+var siteLastUpdateTime = '2024年03月11日23点';
 $(".siteUpdateTime").html(''+siteLastUpdateTime);
 
 
