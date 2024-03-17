@@ -53,40 +53,39 @@ public class BlogServiceImpl implements BlogService {
     public BlogMessageVOEntity findBlogById(long id) {
         BlogMessageVOEntity blogMessage = null;
         // 从缓存中查询
-        if (redisOperator.hasHkey(Constant.BLOG_DETAIL, String.valueOf(id))) {
-            if(redisOperator.hget(Constant.BLOG_DETAIL, String.valueOf(id)) == null){
-                return blogMessage;
-            }
-            blogMessage = (BlogMessageVOEntity) redisOperator.hget(Constant.BLOG_DETAIL, String.valueOf(id));
-            long looks = 0L; // 浏览次数
-            Integer likes = 0; // 点赞数
-
-            // 缓存中是否存在博客浏览数
-            if (redisOperator.hasKey(Constant.BLOG_DETAIL + id)) {
-                looks = redisOperator.incr(Constant.BLOG_DETAIL + id, 1L);
-                // 异步存储
-                asyncService.updBlogLook(id, looks);
-            } else {
-                BlogMessageVOEntity findLikes = blogDao.selectById(id);
-                looks = findLikes.getLook() + 1;
-                redisOperator.set(Constant.BLOG_DETAIL + id, looks);
-            }
-
-            // 缓存中是否存在博客点赞数
-            if (redisOperator.hasKey(Constant.BLOG_LIKES + id)) {
-                likes = (int)redisOperator.get(Constant.BLOG_LIKES + id);
-            } else {
-                BlogMessageVOEntity findLikes = blogDao.selectById(id);
-                redisOperator.set(Constant.BLOG_LIKES + id, findLikes.getLikes());
-            }
-            blogMessage.setLikes(likes);
-            blogMessage.setLook(looks);
-
-        } else {
+//        if (redisOperator.hasHkey(Constant.BLOG_DETAIL, String.valueOf(id))) {
+//            if(redisOperator.hget(Constant.BLOG_DETAIL, String.valueOf(id)) == null){
+//                return blogMessage;
+//            }
+//            blogMessage = (BlogMessageVOEntity) redisOperator.hget(Constant.BLOG_DETAIL, String.valueOf(id));
+//            long looks = 0L; // 浏览次数
+//            Integer likes = 0; // 点赞数
+//
+//            // 缓存中是否存在博客浏览数
+//            if (redisOperator.hasKey(Constant.BLOG_DETAIL + id)) {
+//                looks = redisOperator.incr(Constant.BLOG_DETAIL + id, 1L);
+//                // 异步存储
+//                asyncService.updBlogLook(id, looks);
+//            } else {
+//                BlogMessageVOEntity findLikes = blogDao.selectById(id);
+//                looks = findLikes.getLook() + 1;
+//                redisOperator.set(Constant.BLOG_DETAIL + id, looks);
+//            }
+//
+//            // 缓存中是否存在博客点赞数
+//            if (redisOperator.hasKey(Constant.BLOG_LIKES + id)) {
+//                likes = (int)redisOperator.get(Constant.BLOG_LIKES + id);
+//            } else {
+//                BlogMessageVOEntity findLikes = blogDao.selectById(id);
+//                redisOperator.set(Constant.BLOG_LIKES + id, findLikes.getLikes());
+//            }
+//            blogMessage.setLikes(likes);
+//            blogMessage.setLook(looks);
+//
+//        } else {
             // 从数据库中查 ， 然后存入缓存中
             blogMessage = blogDao.selectById(id);
             redisOperator.hset(Constant.BLOG_DETAIL, String.valueOf(id), blogMessage);
-        }
         return blogMessage;
     }
 

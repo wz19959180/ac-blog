@@ -113,17 +113,17 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public PagedResult findAllBlog(Integer pageNum, Integer pageSize) {
         PagedResult grid = new PagedResult();
-        // 先从缓存中查询
-        if(redisOperator.hasKey(Constant.PAGE_BLOG)){
-            int start = (pageNum - 1) * pageSize;
-            int stop = pageNum * pageSize - 1;
-            List<BlogMessageVOEntity> range = (List<BlogMessageVOEntity>) redisOperator.range(Constant.PAGE_BLOG, start, stop);
-            long length = redisOperator.llen(Constant.PAGE_BLOG);
-            grid.setRecords(length);
-            grid.setRows(range);
-            grid.setPage(pageNum);
-            grid.setTotal(length);
-        }else{
+//        // 先从缓存中查询
+//        if(redisOperator.hasKey(Constant.PAGE_BLOG)){
+//            int start = (pageNum - 1) * pageSize;
+//            int stop = pageNum * pageSize - 1;
+//            List<BlogMessageVOEntity> range = (List<BlogMessageVOEntity>) redisOperator.range(Constant.PAGE_BLOG, start, stop);
+//            long length = redisOperator.llen(Constant.PAGE_BLOG);
+//            grid.setRecords(length);
+//            grid.setRows(range);
+//            grid.setPage(pageNum);
+//            grid.setTotal(length);
+//        }else{
             IPage<BlogMessageVOEntity> blog = blogDao.selectPage(new Page<>(pageNum, pageSize), new QueryWrapper<BlogMessageVOEntity>().orderByDesc("id"));
             for (BlogMessageVOEntity b:
                     blog.getRecords()) {
@@ -138,7 +138,7 @@ public class ArticleServiceImpl implements ArticleService {
             grid.setTotal(blog.getPages());
             grid.setRecords(blog.getTotal());
             grid.setRows(blog.getRecords());
-        }
+//        }
         return grid;
     }
 }

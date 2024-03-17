@@ -69,7 +69,7 @@ qiang:
 ######################################
 logging:
   level:
-    root: warn
+    root: info
     com.qiang.modules.sys.dao: trace
   pattern:
     console: '%p%m%n'
