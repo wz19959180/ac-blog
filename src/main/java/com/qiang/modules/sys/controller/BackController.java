@@ -287,5 +287,15 @@ public class BackController {
         return "user";
     }
 
+    /**
+     * 寻找密码
+     *
+     * @return
+     */
+    @GetMapping("/forlove")
+    public String forlove() {
+        return "forlove";
+    }
+
 
 }
