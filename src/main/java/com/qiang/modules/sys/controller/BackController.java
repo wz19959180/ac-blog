@@ -124,7 +124,7 @@ public class BackController {
         response.setContentType("text/html;charset=utf-8");
         response.setHeader("message", TransCodingUtil.stringToUnicode(message));
         request.getSession().removeAttribute("lastUrl");
-        return "/elasticsearch";
+        return "/elasticSearch";
     }
 
     /**
@@ -295,6 +295,16 @@ public class BackController {
     @GetMapping("/forlove")
     public String forlove() {
         return "forlove";
+    }
+
+    /**
+     * 寻找密码
+     *
+     * @return
+     */
+    @GetMapping("/forRedEnvelope")
+    public String forRedEnvelope() {
+        return "../static/033/forRedEnvelope";
     }
 
 
